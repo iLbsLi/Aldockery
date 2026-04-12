@@ -1,11 +1,15 @@
-# Aldockery 0.4.1
+# Aldockery
 
-Separate beta-domain integration for Home Assistant Docker control with improved branding and fixed options flow.
+Home Assistant custom integration for controlling Docker containers locally or over SSH.
 
-## Domain
-Internal domain remains `aldockery_beta` so it can coexist with older builds, but the displayed integration name is now **Aldockery**.
-
-## Fixes in 0.4.1
-- Added local brand icon/logo assets
-- Removed “Beta” from displayed name
-- Fixed options/configure flow loading from the gear icon
+## Highlights
+- Config-entry based and UI-addable
+- Edit host settings from the integration options
+- Test connection during add/edit
+- Dynamic discovery of new containers
+- Start / Stop / Restart buttons per container
+- Host reachable binary sensor
+- Container count sensor
+- Include / exclude filters
+- Protected containers
+- Prune-missing service for stale entities
