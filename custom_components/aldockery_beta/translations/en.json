@@ -1,0 +1,53 @@
+{
+  "title": "Aldockery",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add Docker host",
+        "description": "Configure a Docker host controlled locally or over SSH.",
+        "data": {
+          "name": "Display name",
+          "mode": "Mode",
+          "docker_bin": "Docker binary",
+          "scan_interval": "Scan interval (seconds)",
+          "ssh_user": "SSH user",
+          "ssh_host": "SSH host",
+          "ssh_key": "SSH private key path (inside HA)",
+          "ssh_port": "SSH port",
+          "include_patterns": "Include patterns (comma-separated)",
+          "exclude_patterns": "Exclude patterns (comma-separated)",
+          "protected_containers": "Protected containers (comma-separated)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to Docker with these settings.",
+      "missing_ssh_fields": "SSH mode requires SSH user, SSH host, and SSH key."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Edit Docker host",
+        "description": "Update the Docker endpoint, filters, and protected containers.",
+        "data": {
+          "name": "Display name",
+          "mode": "Mode",
+          "docker_bin": "Docker binary",
+          "scan_interval": "Scan interval (seconds)",
+          "ssh_user": "SSH user",
+          "ssh_host": "SSH host",
+          "ssh_key": "SSH private key path (inside HA)",
+          "ssh_port": "SSH port",
+          "include_patterns": "Include patterns (comma-separated)",
+          "exclude_patterns": "Exclude patterns (comma-separated)",
+          "protected_containers": "Protected containers (comma-separated)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to Docker with these settings.",
+      "missing_ssh_fields": "SSH mode requires SSH user, SSH host, and SSH key."
+    }
+  }
+}

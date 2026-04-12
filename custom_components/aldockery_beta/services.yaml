@@ -1,0 +1,77 @@
+start_container:
+  name: Start container
+  description: Start a Docker container on a configured Aldockery entry.
+  fields:
+    entry_id:
+      selector:
+        text:
+    host:
+      selector:
+        text:
+    container:
+      required: true
+      selector:
+        text:
+
+stop_container:
+  name: Stop container
+  description: Stop a Docker container on a configured Aldockery entry.
+  fields:
+    entry_id:
+      selector:
+        text:
+    host:
+      selector:
+        text:
+    container:
+      required: true
+      selector:
+        text:
+
+restart_container:
+  name: Restart container
+  description: Restart a Docker container on a configured Aldockery entry.
+  fields:
+    entry_id:
+      selector:
+        text:
+    host:
+      selector:
+        text:
+    container:
+      required: true
+      selector:
+        text:
+
+rediscover:
+  name: Rediscover containers
+  description: Force Aldockery to refresh and create entities for newly discovered containers.
+  fields:
+    entry_id:
+      selector:
+        text:
+    host:
+      selector:
+        text:
+
+prune_missing:
+  name: Prune missing entities
+  description: Remove stale Aldockery entities for containers that no longer exist.
+  fields:
+    entry_id:
+      selector:
+        text:
+    host:
+      selector:
+        text:
+
+test_connection:
+  name: Test connection
+  description: Test Docker connectivity for a configured Aldockery entry.
+  fields:
+    entry_id:
+      selector:
+        text:
+    host:
+      selector:
+        text:
