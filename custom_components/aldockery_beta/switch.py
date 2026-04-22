@@ -33,7 +33,7 @@ class AldockeryContainerSwitch(CoordinatorEntity, SwitchEntity):
 
     @property
     def suggested_object_id(self) -> str:
-        return switch_suggested_object_id(self.entry_name, self.container_name)
+        return switch_suggested_object_id(self.container_name)
 
     @property
     def is_on(self) -> bool:

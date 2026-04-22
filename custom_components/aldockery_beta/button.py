@@ -33,7 +33,7 @@ class _BaseContainerButton(CoordinatorEntity, ButtonEntity):
 
     @property
     def suggested_object_id(self) -> str:
-        return button_suggested_object_id(self.entry_name, self.container_name, self.action_name)
+        return button_suggested_object_id(self.container_name, self.action_name)
 
     @property
     def available(self) -> bool:
