@@ -7,6 +7,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DATA_COORDINATOR, DATA_ENTRY_NAME, DATA_ENTRIES, DATA_KNOWN_SWITCHES, DOMAIN
+from .naming import switch_suggested_object_id, switch_unique_id
 
 
 class AldockeryContainerSwitch(CoordinatorEntity, SwitchEntity):
@@ -24,11 +25,15 @@ class AldockeryContainerSwitch(CoordinatorEntity, SwitchEntity):
 
     @property
     def unique_id(self) -> str:
-        return f"aldockery_beta_{self.entry_id}_{self.container_name}_switch"
+        return switch_unique_id(self.entry_id, self.entry_name, self.container_name)
 
     @property
     def name(self) -> str:
-        return f"{self.entry_name} {self.container_name}"
+        return self.container_name
+
+    @property
+    def suggested_object_id(self) -> str:
+        return switch_suggested_object_id(self.entry_name, self.container_name)
 
     @property
     def is_on(self) -> bool:

@@ -35,6 +35,7 @@ from .const import (
     SERVICE_PRUNE_MISSING,
     SERVICE_TEST_CONNECTION,
 )
+from .naming import container_slug, host_slug
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -154,8 +155,9 @@ async def _service_prune_missing(hass: HomeAssistant, call: ServiceCall):
 
     for entry_id, item in _resolve_entries(hass, call):
         coordinator = item[DATA_COORDINATOR]
-        current = set(coordinator.data.keys())
-        prefix = f"aldockery_beta_{entry_id}_"
+        current = {container_slug(name) for name in coordinator.data.keys()}
+        prefix = f"aldockery_beta:{entry_id}:"
+        host_fragment = host_slug(item[DATA_ENTRY_NAME])
 
         to_remove = []
         for entity in list(registry.entities.values()):
@@ -166,13 +168,21 @@ async def _service_prune_missing(hass: HomeAssistant, call: ServiceCall):
             if not entity.unique_id.startswith(prefix):
                 continue
 
-            suffixes = ["_switch", "_start", "_stop", "_restart"]
-            container_name = None
-            for suffix in suffixes:
-                if entity.unique_id.endswith(suffix):
-                    container_name = entity.unique_id[len(prefix):-len(suffix)]
-                    break
-            if container_name is None:
+            parts = entity.unique_id.split(":")
+            if len(parts) < 5:
+                continue
+
+            _, uid_entry_id, kind, uid_host, *rest = parts
+            if uid_entry_id != entry_id or uid_host != host_fragment:
+                continue
+
+            if kind == "switch" and len(rest) == 1:
+                container_name = rest[0]
+            elif kind == "button" and len(rest) == 2:
+                container_name, action = rest
+                if action not in ("start", "stop", "restart"):
+                    continue
+            else:
                 continue
 
             if container_name not in current:

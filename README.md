@@ -4,8 +4,11 @@ A Home Assistant custom integration for controlling Docker containers locally or
 
 ## Features
 - Add Docker hosts as Home Assistant integrations
-- Create switches for container running state
-- Create start, stop, and restart buttons per container
+- Keep device names host-style, such as `ORPI Docker` and `RASPI Docker`
+- Create switches for container running state with friendly names like `cp-web`
+- Create start, stop, and restart buttons per container with friendly names like `cp-web restart`
+- Fresh recreated entities are intended to land on IDs like `switch.<container>_<host>_docker` and `button.<container>_<action>_<host>_docker`
+- Use `suggested_object_id` to guide the initial object/entity IDs for fresh entries
 - Add host-level reachable and container-count sensors
 - Support include/exclude filters and protected containers
 - Include services for rediscovery, testing connection, and pruning stale entities
@@ -25,3 +28,4 @@ Use your own Docker host, SSH user, and SSH key path from your Home Assistant en
 ## Notes
 - The current integration folder is `custom_components/aldockery_beta`.
 - The displayed integration name is **Aldockery**.
+- The current naming behavior is container-first in entity friendly names, while device names still include the host label.
