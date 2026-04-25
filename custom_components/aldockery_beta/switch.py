@@ -29,7 +29,7 @@ class AldockeryContainerSwitch(CoordinatorEntity, SwitchEntity):
 
     @property
     def name(self) -> str:
-        return self.container_name
+        return f"{self.container_name} Docker"
 
     @property
     def suggested_object_id(self) -> str:
@@ -60,7 +60,7 @@ class AldockeryContainerSwitch(CoordinatorEntity, SwitchEntity):
     def device_info(self) -> DeviceInfo:
         return DeviceInfo(
             identifiers={(DOMAIN, f"{self.entry_id}_host")},
-            name=f"{self.entry_name} Docker",
+            name=self.entry_name,
             manufacturer="Aldockery",
             model="Docker Host",
         )

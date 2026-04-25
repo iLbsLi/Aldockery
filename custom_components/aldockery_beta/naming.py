@@ -31,8 +31,12 @@ def button_unique_id(entry_id: str, host_name: str, container_name: str, action:
 
 
 def switch_suggested_object_id(container_name: str) -> str:
-    return container_slug(container_name)
+    return f"{container_slug(container_name)}_docker"
 
 
 def button_suggested_object_id(container_name: str, action: str) -> str:
-    return f"{container_slug(container_name)}_{slugify_part(action)}"
+    return f"{container_slug(container_name)}_{slugify_part(action)}_docker"
+
+
+def sensor_suggested_object_id(name: str) -> str:
+    return f"{slugify_part(name)}_docker"

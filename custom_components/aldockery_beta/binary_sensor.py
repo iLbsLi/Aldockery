@@ -6,6 +6,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DATA_COORDINATOR, DATA_ENTRY_NAME, DATA_ENTRIES, DATA_KNOWN_BINARY_SENSORS, DOMAIN
+from .naming import sensor_suggested_object_id
 
 
 class AldockeryHostReachableBinarySensor(CoordinatorEntity, BinarySensorEntity):
@@ -23,7 +24,11 @@ class AldockeryHostReachableBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
     @property
     def name(self) -> str:
-        return f"{self.entry_name} reachable"
+        return "reachable Docker"
+
+    @property
+    def suggested_object_id(self) -> str:
+        return sensor_suggested_object_id("reachable")
 
     @property
     def is_on(self):
@@ -40,7 +45,7 @@ class AldockeryHostReachableBinarySensor(CoordinatorEntity, BinarySensorEntity):
     def device_info(self) -> DeviceInfo:
         return DeviceInfo(
             identifiers={(DOMAIN, f"{self.entry_id}_host")},
-            name=f"{self.entry_name} Docker",
+            name=self.entry_name,
             manufacturer="Aldockery",
             model="Docker Host",
         )

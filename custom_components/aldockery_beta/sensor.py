@@ -6,6 +6,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DATA_COORDINATOR, DATA_ENTRY_NAME, DATA_ENTRIES, DATA_KNOWN_SENSORS, DOMAIN
+from .naming import sensor_suggested_object_id
 
 
 class AldockeryContainerCountSensor(CoordinatorEntity, SensorEntity):
@@ -23,7 +24,11 @@ class AldockeryContainerCountSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def name(self) -> str:
-        return f"{self.entry_name} container count"
+        return "container count Docker"
+
+    @property
+    def suggested_object_id(self) -> str:
+        return sensor_suggested_object_id("container count")
 
     @property
     def native_value(self):
@@ -41,7 +46,7 @@ class AldockeryContainerCountSensor(CoordinatorEntity, SensorEntity):
     def device_info(self) -> DeviceInfo:
         return DeviceInfo(
             identifiers={(DOMAIN, f"{self.entry_id}_host")},
-            name=f"{self.entry_name} Docker",
+            name=self.entry_name,
             manufacturer="Aldockery",
             model="Docker Host",
         )
