@@ -48,22 +48,6 @@ class _BaseContainerButton(CoordinatorEntity, ButtonEntity):
             model="Docker Host",
         )
 
-class AldockeryStartButton(_BaseContainerButton):
-    action_name = "start"
-    async def async_press(self) -> None:
-        await self.hass.async_add_executor_job(self.coordinator.api.start_container, self.container_name)
-        await self.coordinator.async_request_refresh()
-
-class AldockeryStopButton(_BaseContainerButton):
-    action_name = "stop"
-    @property
-    def available(self) -> bool:
-        item = self._item
-        return bool(item) and not item.get("protected", False)
-    async def async_press(self) -> None:
-        await self.hass.async_add_executor_job(self.coordinator.api.stop_container, self.container_name)
-        await self.coordinator.async_request_refresh()
-
 class AldockeryRestartButton(_BaseContainerButton):
     action_name = "restart"
     async def async_press(self) -> None:
@@ -82,11 +66,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
             if key in known:
                 continue
             known.add(key)
-            new.extend([
-                AldockeryStartButton(entry.entry_id, entry_name, coordinator, key),
-                AldockeryStopButton(entry.entry_id, entry_name, coordinator, key),
-                AldockeryRestartButton(entry.entry_id, entry_name, coordinator, key),
-            ])
+            new.append(AldockeryRestartButton(entry.entry_id, entry_name, coordinator, key))
         if new:
             async_add_entities(new)
 

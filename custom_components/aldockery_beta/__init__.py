@@ -180,7 +180,7 @@ async def _service_prune_missing(hass: HomeAssistant, call: ServiceCall):
                 container_name = rest[0]
             elif kind == "button" and len(rest) == 2:
                 container_name, action = rest
-                if action not in ("start", "stop", "restart"):
+                if action != "restart":
                     continue
             else:
                 continue
